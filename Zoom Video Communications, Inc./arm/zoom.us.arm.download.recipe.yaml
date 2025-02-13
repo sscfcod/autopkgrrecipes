@@ -1,0 +1,18 @@
+Description: Downloads the latest version of Zoom for ARM
+Identifier: com.github.sscfcod.download.zoom.us.arm
+Input:
+  NAME: ZoomInstallerFullArmTest
+MinimumVersion: '2.3'
+Process:
+- Arguments:
+    filename: "%NAME%.pkg"
+    url: https://zoom.us/client/latest/Zoom.pkg?archType=arm64
+  Processor: URLDownloader
+- Processor: EndOfCheckPhase
+- Arguments:
+    expected_authority_names:
+      - "Developer ID Installer: Zoom Video Communications, Inc. (BJ4HAAB9B3)"
+      - "Developer ID Certification Authority"
+      - "Apple Root CA"
+    input_path: "%pathname%"
+  Processor: CodeSignatureVerifier

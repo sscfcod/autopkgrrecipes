@@ -1,0 +1,33 @@
+Description: Downloads the latest version of Zoom for arm and imports it into Munki.
+Identifier: com.github.sscfcod.munki.zoom.us.arm
+Input:
+  NAME: ZoomInstallerFullArmTest
+  pkginfo:
+    blocking_applications:
+     - ZoomPhone.app
+     - ZoomUninstaller.app
+     - Transcode.app
+     - ZMScreenshot.app
+     - CptHost.app
+     - ZoomClips.app
+     - zoom.us.app
+     - aomhost.app
+     - ZoomAutoUpdater.app
+     - airhost.app
+     - caphost.app
+     - zCCIMeetingHost.app
+    catalogs:
+     - testing
+    description: This app is the Apple Silicon Mac client for cloud-based HD video meeting service Zoom.us.
+    developer: Zoom Video Communications, Inc.
+    display-name: Zoom - Apple Silicon Test
+    name: "%NAME%"
+    unattended_install: true
+#    force_munkiimport: true
+MinimumVersion: '2.3'
+ParentRecipe: com.github.sscfcod.download.zoom.us.arm
+Process:
+- Arguments:
+    pkg_path: "%pathname%"
+    repo_subdirectory: "%pathname%"
+  Processor: MunkiImporter

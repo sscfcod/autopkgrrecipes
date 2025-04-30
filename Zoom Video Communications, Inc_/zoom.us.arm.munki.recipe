@@ -11,7 +11,7 @@
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
-		<string>ZoomInstallerFullArm</string>
+		<string>ZoomInstallerFullARMTest</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>blocking_applications</key>
@@ -38,7 +38,7 @@
 			<key>developer</key>
 			<string>Zoom Video Communications, Inc.</string>
 			<key>display_name</key>
-			<string>Zoom - Apple Silicon Test</string>
+			<string>Zoom - Apple Silicon</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
@@ -79,6 +79,8 @@
 			<dict>
 				<key>input_plist_path</key>
 				<string>%RECIPE_CACHE_DIR%/payload/Applications/zoom.us.app/Contents/Info.plist</string>
+				<key>plist_version_key</key>
+				<string>CFBundleVersion</string>
 			</dict>
 			<key>Processor</key>
 			<string>Versioner</string>
@@ -90,6 +92,10 @@
 				<dict>
 			  	    <key>version</key>
 					<string>%version%</string>
+					<key>supported_architectures</key>
+					<array>
+					    <string>arm64</string>
+					</array>
 				</dict>
 			</dict>
 			<key>Processor</key>

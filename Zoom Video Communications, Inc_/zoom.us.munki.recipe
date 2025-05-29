@@ -13,7 +13,7 @@
 		<key>MUNKI_REPO_SUBDIR</key>
 		<string>apps/%NAME%</string>
 		<key>NAME</key>
-		<string>zoom.us</string>
+		<string>ZoomInstallerFull</string>
 		<key>pkginfo</key>
 		<dict>
 			<key>blocking_applications</key>
@@ -40,7 +40,7 @@
 			<key>developer</key>
 			<string>Zoom Video Communications, Inc.</string>
 			<key>display_name</key>
-			<string>zoom.us</string>
+			<string>Zoom</string>
 			<key>name</key>
 			<string>%NAME%</string>
 			<key>unattended_install</key>
@@ -53,6 +53,55 @@
 	<string>com.github.sscfcod.download.zoom.us</string>
 	<key>Process</key>
 	<array>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>flat_pkg_path</key>
+				<string>%pathname%</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack</string>
+			</dict>
+			<key>Processor</key>
+			<string>FlatPkgUnpacker</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_payload_path</key>
+				<string>%RECIPE_CACHE_DIR%/unpack/zoomus.pkg/Payload</string>
+				<key>destination_path</key>
+				<string>%RECIPE_CACHE_DIR%/payload/Applications</string>
+			</dict>
+			<key>Processor</key>
+			<string>PkgPayloadUnpacker</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+				<key>input_plist_path</key>
+				<string>%RECIPE_CACHE_DIR%/payload/Applications/zoom.us.app/Contents/Info.plist</string>
+				<key>plist_version_key</key>
+				<string>CFBundleVersion</string>
+			</dict>
+			<key>Processor</key>
+			<string>Versioner</string>
+		</dict>
+		<dict>
+			<key>Arguments</key>
+			<dict>
+			    <key>additional_pkginfo</key>
+				<dict>
+			  	    <key>version</key>
+					<string>%version%</string>
+					<key>supported_architectures</key>
+					<array>
+					    <string>x86_64</string>
+					</array>
+				</dict>
+			</dict>
+			<key>Processor</key>
+			<string>MunkiPkginfoMerger</string>
+		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>
